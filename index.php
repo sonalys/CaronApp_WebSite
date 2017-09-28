@@ -1,7 +1,56 @@
 ﻿<?php
+include "configs.php";
 
+session_start();
+$conn = new mysqli($db_servername, $db_username, $db_password); // Creating DB Connection
+if($conn->connect_error){
+ die("Connection Failed to the Database!");	 // Error Catch
+}
+mysqli_select_db($conn, $db_tablename); // Database selection
+
+//$user_session = md5(microtime().$_SERVER['REMOTE_ADDR']); // SESSION ID, UNIQUE BY NAVIGATOR
+
+function CheckCookieLogin() {
+    $uname = $_COOKIE['uname']; 
+    if (!empty($uname)) {   
+        $query = "SELECT * FROM `users` WHERE `session`='$uname'";
+		$result = mysqli_query($conn, $query);
+		if ( mysqli_num_rows($result) > 0 ){
+			$_SESSION['logged_in'] = 1;
+			$_SESSION['cookie'] = $uname;
+			// reset expiry date
+			setcookie("uname",$uname,time()+3600*24*365,'/', '.localaddress');
+		}
+    }
+}
+
+$username = "raicon";
+$password = "123";
+
+if(!isset($_SESSION['cookie']) && empty($_SESSION['logged_in'])) {
+    CheckCookieLogin();
+}
+else{
+$query = "SELECT username, password FROM users WHERE username='".$username."' AND password='".$password."'";
+$result = mysqli_query($conn, $query);
+
+if ( mysqli_num_rows($result) > 0 )
+	
+	$_SESSION['logged_in'] = 1;
+	$cookiehash = md5(sha1($username . $_SERVER['REMOTE_ADDR']));
+	setcookie("uname",$cookiehash,time()+3600*24*365,'/', '.localaddress');
+	$_SESSION['cookie'] = $cookiehash;
+	$query = "UPDATE `users` SET `session`='$cookiehash' WHERE `username`='$username'";
+	$stmt = $conn->stmt_init();
+	$stmt->prepare($query);
+	$stmt->execute();
+	$stmt->close();
+	
+}
+	
 ?>
 <html> <!-- HTML TAG -->
+<link rel="icon" href="favicon.ico" type="image/ico">
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="style.css" rel="stylesheet" type="text/css" /> <!-- External References -->
 <script src="background.js"></script>
@@ -25,7 +74,7 @@
 </div>
 <div class="menu_superior">
 	<div class="profile">
-		<a class="user_name dropdown_profile">Alysson Ribeiro</a>
+		<a class="user_name dropdown_profile"><?php if(isset($_SESSION["logged_in"])) echo $username; else echo "Logue-se"; ?></a>
 		<img class="user_icon dropdown_profile" src='https://i.pinimg.com/736x/32/c8/5c/32c85c66e56c16729b04de8e76051d04--anime-boys-anime-manga.jpg'>
 		<div class="login_panel"></div>
 	</div>

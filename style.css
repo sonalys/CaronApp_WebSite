@@ -1,0 +1,156 @@
+/*.div_blur {
+  background-image: url("img/background.jpg");
+  background-size: cover;
+  filter: blur(5px);
+  width: 100%;
+  height: 100%;
+  transform: scale(1.03);
+  position: fixed;
+}*/
+
+.div_overlay {
+	background-color: #000c;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+}
+
+.content {
+ position: relative;
+ top: 0;
+ margin:auto;
+ width: 1200px;
+ height: 100%;
+ display: flex;
+ flex-direction: column;
+}
+
+.home_background {
+	position: absolute;
+	height: 90%;
+	width: 85%;
+	right: 0;
+	top: 10%;
+	background-color: #fffd;
+}
+
+.logo {
+	position: relative;
+	margin: auto;
+	margin-bottom: 30px;
+	text-align: center;
+	top: 10px;
+	width: 100px;
+	height: 100px;
+	background-image: url("img/logo.png");
+	background-size: cover;
+}
+
+.menu_lateral {
+	position: relative;
+	top: 50px;
+	left: 5%;
+	width: 200px;
+	height: 100%;
+	/*background-color: #cccf;*/
+}
+
+.menu_superior {
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 50px;
+	width: 100%;
+	background-color: #00cf;
+}
+ul.lista_lateral {
+	list-style-type: none;
+	position: relative;
+	padding: 0;
+	padding-top: 20px;
+	top: 0;
+}
+
+li {
+	background-color: #dddf;
+	-webkit-transition: .5s;
+	margin-bottom: 3px;
+}
+
+li:hover {
+	background-color: #888f;
+}
+
+li > a {
+	color: #000f;
+	text-decoration: none;
+	display: block;
+	width: 200px;
+	height: 30px;
+	padding-top: 8px;
+	text-align: center;      
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+.login_panel {
+	margin-top: 40px;
+	margin-bottom: 20px;
+	margin-left: -35px;
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	right: 0px;
+	top: 10px;
+	border-style: solid;
+	border-width: 1px;
+	display: none;
+	background-color: #dddf;
+}
+
+details > summary:hover {
+	/*background-color: #888f;*/
+}
+
+.profile {
+	position: absolute;
+	top: 4px;
+	right: 0px;
+	width: 170px;
+	height:  50px;
+}
+
+a.user_name {
+	display: inline-block;
+	vertical-align: middle;
+	padding-top: 8px;
+	text-align: right;
+	position: absolute;
+	right: 60px;
+}
+
+img.user_icon {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	right: 10px;
+	border-radius: 20px;
+	background-size: cover;
+	cursor: pointer;
+}
+
+.profile {
+	cursor:pointer;
+}
+
+.profile:hover .login_panel {
+	display: block;
+}
+
+
+body {
+	margin: 0px;
+	overflow-h: hidden;
+}

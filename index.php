@@ -2,11 +2,7 @@
 include "configs.php";
 
 session_start();
-$conn = new mysqli($db_servername, $db_username, $db_password); // Creating DB Connection
-if($conn->connect_error){
- die("Connection Failed to the Database!");	 // Error Catch
-}
-mysqli_select_db($conn, $db_tablename); // Database selection
+
 
 //$user_session = md5(microtime().$_SERVER['REMOTE_ADDR']); // SESSION ID, UNIQUE BY NAVIGATOR
 
@@ -32,7 +28,7 @@ if(!isset($_SESSION['cookie']) && empty($_SESSION['logged_in'])) {
 }
 else{
 $query = "SELECT username, password FROM users WHERE username='".$username."' AND password='".$password."'";
-$result = mysqli_query($conn, $query);
+$result = queryData($conn, $query);
 
 if ( mysqli_num_rows($result) > 0 )
 	
@@ -41,11 +37,7 @@ if ( mysqli_num_rows($result) > 0 )
 	setcookie("uname",$cookiehash,time()+3600*24*365,'/', '.localaddress');
 	$_SESSION['cookie'] = $cookiehash;
 	$query = "UPDATE `users` SET `session`='$cookiehash' WHERE `username`='$username'";
-	$stmt = $conn->stmt_init();
-	$stmt->prepare($query);
-	$stmt->execute();
-	$stmt->close();
-	
+	executeData($conn, $query);
 }
 	
 ?>

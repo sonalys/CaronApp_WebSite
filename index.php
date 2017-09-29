@@ -45,6 +45,7 @@ if ( mysqli_num_rows($result) > 0 )
 <link rel="icon" href="favicon.ico" type="image/ico">
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="style.css" rel="stylesheet" type="text/css" /> <!-- External References -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="background.js"></script>
  <!-- <div class="div_blur"></div>Blurry Background 
 <div class="div_overlay"></div>-->

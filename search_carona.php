@@ -22,8 +22,6 @@ echo " <br>Destino: ".$resultset[0]['destino']." <br>Data: ".$resultset[0]['data
         });
         directionsDisplay.setMap(map);
 		calculateAndDisplayRoute(directionsService, directionsDisplay);
-		setMapOnAll(null);
-
 	  }
 
 
@@ -35,7 +33,6 @@ echo " <br>Destino: ".$resultset[0]['destino']." <br>Data: ".$resultset[0]['data
               location: array[objs],
               stopover: true
             });
-		console.log(waypts);
         directionsService.route({
           origin: '<?php echo $resultset[0]['origem']; ?>',
           destination: '<?php echo $resultset[0]['destino']; ?>',

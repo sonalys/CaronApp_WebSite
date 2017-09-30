@@ -16,6 +16,21 @@ function queryData($conn, $query){
 	return mysqli_query($conn, $query);
 }
 
+function CheckCookieLogin() {
+    $uname = $_COOKIE['uname']; 
+    if (!empty($uname)) {   
+        $query = "SELECT * FROM `users` WHERE `session`='$uname'";
+		$result = mysqli_query($conn, $query);
+		if ( mysqli_num_rows($result) > 0 ){
+			$_SESSION['logged_in'] = 1;
+			$_SESSION['cookie'] = $uname;
+			// reset expiry date
+			setcookie("uname",$uname,time()+3600*24*365,'/', '.localaddress');
+			return true;
+		}
+    }
+}
+
 function executeData($conn, $query){
 	$stmt = $conn->stmt_init();
 	$stmt->prepare($query);

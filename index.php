@@ -6,20 +6,6 @@ session_start();
 
 //$user_session = md5(microtime().$_SERVER['REMOTE_ADDR']); // SESSION ID, UNIQUE BY NAVIGATOR
 
-function CheckCookieLogin() {
-    $uname = $_COOKIE['uname']; 
-    if (!empty($uname)) {   
-        $query = "SELECT * FROM `users` WHERE `session`='$uname'";
-		$result = mysqli_query($conn, $query);
-		if ( mysqli_num_rows($result) > 0 ){
-			$_SESSION['logged_in'] = 1;
-			$_SESSION['cookie'] = $uname;
-			// reset expiry date
-			setcookie("uname",$uname,time()+3600*24*365,'/', '.localaddress');
-		}
-    }
-}
-
 $username = "raicon";
 $password = "123";
 
@@ -45,7 +31,6 @@ if ( mysqli_num_rows($result) > 0 )
 <link rel="icon" href="favicon.ico" type="image/ico">
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <link href="style.css" rel="stylesheet" type="text/css" /> <!-- External References -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="background.js"></script>
  <!-- <div class="div_blur"></div>Blurry Background 
 <div class="div_overlay"></div>-->
